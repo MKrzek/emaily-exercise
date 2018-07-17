@@ -5,6 +5,7 @@ const keys = require("./config/keys");
 const passportConfig = require("./services/passport");
 //condensed version of what is above
 require("./services/passport");
+require("./models/user.js");
 mongoose.connect(
   keys.mongoURI,
   { useNewUrlParser: true }
