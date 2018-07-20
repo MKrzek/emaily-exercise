@@ -4,7 +4,7 @@ const cookieSession = require("cookie-session");
 const passport = require("passport");
 const keys = require("./config/keys");
 //nothing is returned from the below statement so we can just condense it
-const User = require("./models/User.js");
+require("./models/owner.js");
 require("./services/passport");
 
 //condensed version of what is above
