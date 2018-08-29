@@ -6,14 +6,16 @@ const bodyParser = require("body-parser");
 const keys = require("./config/keys");
 //nothing is returned from the below statement so we can just condense it
 require("./models/User.js");
+require('./models/Survey');
 require("./services/passport");
 
 //condensed version of what is above
 
-mongoose.connect(
-  keys.mongoURI,
-  { useNewUrlParser: true }
-);
+mongoose
+  .connect(keys.mongoURI)
+  .then(() => console.log('MongoDB connected'))
+  .catch(err => console.log(err));
+
 const app = express();
 app.use(bodyParser.json());
 app.use(
