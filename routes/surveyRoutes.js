@@ -7,7 +7,10 @@ const Survey = mongoose.model('surveys')
 
 module.exports = app => {
     //req will contain a title, body, recipients 
-    app.post('/api/surveys', requireLogin, requireCredits, (req, res) => {
+    app.get('/api/surveys/thanks', (req, res) => {
+        res.send('Thanks for responding')
+    })
+    app.post('/api/surveys', requireLogin, requireCredits, async (req, res) => {
         const { title, subject, body, recipients } = req.body
         //survey is an instance of Survey that is going to be saved
         const survey = new Survey({
@@ -19,6 +22,17 @@ module.exports = app => {
             dateSent: Date.now()
         })
         const mailer = new Mailer(survey, surveyTemplate(survey))
+        try {
+            await mailer.send()
+            await survey.save()
+            req.user.credits -= 1;
+            const user = await req.user.save()
+            res.send(user)
+        }
+        catch (err) {
+            res.status(422).send(err)
+        }
+
     })
 }
 

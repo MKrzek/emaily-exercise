@@ -1,13 +1,14 @@
 import React from "react";
 import { Route, BrowserRouter } from 'react-router-dom';
 import { connect } from 'react-redux';
-import * as actions from '../actions/index.js';
+import { fetchUser } from '../actions/index.js';
+import Dashboard from './Dashboard'
 import Header from './Header'
 import Landing from './Landing'
+import SurveyNew from './surveys/SurveyNew'
 //BrowserRouter looks at the url and changes the components that should be displayed depending on that url
 
-const SurveyNew = () => <h2> SurveyNew </h2>
-const Dashboard = () => <h2> Dashboard </h2>
+
 
 class App extends React.Component {
   componentDidMount() {
@@ -19,12 +20,13 @@ class App extends React.Component {
         <div>
           <Header />
           <Route exact path='/' component={Landing} />
-          <Route path='/surveys/new' component={SurveyNew} />
           <Route exact path='/surveys' component={Dashboard} />
+          <Route path='/surveys/new' component={SurveyNew} />
+
         </div>
       </BrowserRouter>
 
     </div>
   }
 }
-export default connect(null, actions)(App)
+export default connect(null, { fetchUser })(App)
