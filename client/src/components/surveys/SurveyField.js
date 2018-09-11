@@ -3,7 +3,7 @@ import React from 'react';
 export default ({input, label, meta: {error, touched}})=>{
     //props.input
     //{...input} equals to onBlur={input.onBlur}
-    console.log('props', input )
+    // console.log('props', input )
     return ( 
         <div>
              <label>{label}</label>
