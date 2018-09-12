@@ -12,7 +12,7 @@ require("./services/passport");
 //condensed version of what is above
 
 mongoose
-  .connect(keys.mongoURI)
+  .connect(keys.mongoURI, {useNewUrlParser: true})
   .then(() => console.log('MongoDB connected'))
   .catch(err => console.log(err));
 
