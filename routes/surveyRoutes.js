@@ -10,8 +10,13 @@ const Survey = mongoose.model('surveys')
 
 
 module.exports = app => {
+    app.get('/api/surveys', requireLogin, async(req, res)=>{
+        const surveys = await Survey.find({_user: req.user.id})
+        .select({recipients: false});
+        res.send(surveys)
+    })
     //req will contain a title, body, recipients 
-    app.get('/api/surveys/thanks', (req, res) => {
+    app.get('/api/surveys/:surveyId/:choice', (req, res) => {
         res.send('Thanks for responding')
     })
 
@@ -36,7 +41,8 @@ module.exports = app => {
                 }
             },{
                 $inc: {[choice]: 1},
-                $set: {'recipients.$.responded': true}
+                $set: {'recipients.$.responded': true},
+                lastResponded: new Date()
             }).exec()
         })
         .value()
