@@ -1,7 +1,9 @@
-#EmailyApp - excercise
+EmailyApp - excercise
+
 Card number to test Stripe: 4242 4242 4242 4242
 
-#Technologies Used: 
+Technologies Used: 
+
 Express
 Mongoose
 Passport
